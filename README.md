@@ -244,7 +244,7 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 
 ## 📝 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is done by srinadh
 
 ## 🙏 Acknowledgments
 
@@ -255,9 +255,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 📧 Contact
 
-For questions, suggestions, or collaboration opportunities, please open an issue on GitHub.
+Mail:srinadherakala1595@gmail.com.
 
 ---
-
-**Made with ❤️ using TensorFlow, Keras, and Streamlit**
 
