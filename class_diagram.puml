@@ -1,0 +1,77 @@
+@startuml Animal Classification Class Diagram
+
+skinparam classAttributeIconSize 0
+skinparam class {
+    BackgroundColor White
+    ArrowColor Black
+    BorderColor Black
+}
+
+' Main Classes
+class AnimalClassifier {
+    - IMG_SIZE: int = 224
+    - BATCH_SIZE: int = 32
+    - EPOCHS: int = 10
+    - DATASET_DIR: str
+    + train_model()
+    + save_model()
+    + predict_image()
+}
+
+class ImageDataGenerator {
+    + rescale: float = 1./255
+    + rotation_range: int = 15
+    + zoom_range: float = 0.2
+    + width_shift_range: float = 0.1
+    + height_shift_range: float = 0.1
+    + horizontal_flip: boolean = True
+    + validation_split: float = 0.2
+    + flow_from_directory()
+}
+
+class MobileNetV2 {
+    + include_top: boolean = False
+    + input_shape: tuple = (224, 224, 3)
+    + weights: str = 'imagenet'
+    + trainable: boolean = False
+}
+
+class Model {
+    + optimizer: Adam
+    + loss: str = 'categorical_crossentropy'
+    + metrics: list = ['accuracy']
+    + compile()
+    + fit()
+    + save()
+}
+
+class CustomLayers {
+    + GlobalAveragePooling2D
+    + Dropout(rate: float = 0.3)
+    + Dense(units: int, activation: str)
+}
+
+' Relationships
+AnimalClassifier --> ImageDataGenerator : uses
+AnimalClassifier --> MobileNetV2 : uses
+AnimalClassifier --> Model : creates
+AnimalClassifier --> CustomLayers : uses
+
+' Notes
+note right of AnimalClassifier
+  Main orchestrator class that
+  handles the entire training
+  and prediction pipeline
+end note
+
+note right of ImageDataGenerator
+  Handles image preprocessing,
+  augmentation and data loading
+end note
+
+note right of MobileNetV2
+  Pre-trained base model for
+  feature extraction
+end note
+
+@enduml 

@@ -1,0 +1,116 @@
+@startuml Animal Classification System
+
+' Use Case Diagram
+@startuml UseCase
+skinparam actorStyle awesome
+actor User
+rectangle "Animal Classification System" {
+  usecase "Train Model" as UC1
+  usecase "Classify Image" as UC2
+  usecase "View Results" as UC3
+  usecase "Save Model" as UC4
+}
+User --> UC1
+User --> UC2
+User --> UC3
+User --> UC4
+@enduml
+
+' Class Diagram
+@startuml Class
+skinparam classAttributeIconSize 0
+
+class ImageDataGenerator {
+  +rescale: float
+  +rotation_range: int
+  +zoom_range: float
+  +width_shift_range: float
+  +height_shift_range: float
+  +horizontal_flip: boolean
+  +validation_split: float
+  +flow_from_directory()
+}
+
+class MobileNetV2 {
+  +include_top: boolean
+  +input_shape: tuple
+  +weights: str
+  +trainable: boolean
+}
+
+class Model {
+  +compile()
+  +fit()
+  +save()
+}
+
+class AnimalClassifier {
+  -img_size: int
+  -batch_size: int
+  -epochs: int
+  -dataset_dir: str
+  +train_model()
+  +classify_image()
+  +save_model()
+}
+
+ImageDataGenerator --> AnimalClassifier
+MobileNetV2 --> AnimalClassifier
+Model --> AnimalClassifier
+@enduml
+
+' Sequence Diagram
+@startuml Sequence
+actor User
+participant "AnimalClassifier" as AC
+participant "ImageDataGenerator" as IDG
+participant "MobileNetV2" as MN
+participant "Model" as M
+
+User -> AC: train_model()
+activate AC
+AC -> IDG: create_data_generator()
+activate IDG
+IDG --> AC: generator
+deactivate IDG
+AC -> MN: create_base_model()
+activate MN
+MN --> AC: base_model
+deactivate MN
+AC -> M: compile_model()
+activate M
+M --> AC: compiled_model
+deactivate M
+AC -> M: fit_model()
+activate M
+M --> AC: trained_model
+deactivate M
+AC -> M: save_model()
+activate M
+M --> AC: saved_model
+deactivate M
+AC --> User: training complete
+deactivate AC
+@enduml
+
+' Activity Diagram
+@startuml Activity
+start
+:Initialize Parameters;
+:Load Dataset;
+:Create Data Generator;
+:Create Base Model;
+:Add Classification Layers;
+:Compile Model;
+:Train Model;
+if (Validation Accuracy > Threshold?) then (yes)
+  :Save Model;
+  :Training Complete;
+else (no)
+  :Adjust Parameters;
+  backward:Retrain;
+endif
+stop
+@enduml
+
+@enduml 

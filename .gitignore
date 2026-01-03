@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual Environment
+tf_env/
+venv/
+env/
+ENV/
+.venv
+
+# Model files (large binary files - uncomment if you want to exclude them)
+# *.h5
+# *.hdf5
+# *.pkl
+# *.pth
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Environment variables
+.env
+.env.local
+
+# Logs
+*.log
+
+# Dataset (uncomment if you don't want to commit the dataset)
+# animaldaset/
+
+# Temporary files
+*.tmp
+*.temp
+
